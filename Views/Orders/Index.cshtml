@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Carsweb.Models.Order>
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h2>Orders</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New Order</a>
+</p>
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>Car ID</th>
+            <th>Date</th>
+            <th>Total</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var o in Model)
+            {
+                <tr>
+                    <td>@o.CustomerId</td>
+                    <td>@o.CarId</td>
+                    <td>@o.OrderDate.ToShortDateString()</td>
+                    <td>@o.TotalPrice.ToString("C")</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@o.Id" class="btn btn-info btn-sm">Details</a>
+                        <a asp-action="Delete" asp-route-id="@o.Id" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,16 @@
+﻿@model Carsweb.Models.Order
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<h2>Order Details</h2>
+
+<div class="card p-3">
+    <p><strong>Customer ID:</strong> @Model.CustomerId</p>
+    <p><strong>Car ID:</strong> @Model.CarId</p>
+    <p><strong>Date:</strong> @Model.OrderDate.ToShortDateString()</p>
+    <p><strong>Total:</strong> @Model.TotalPrice.ToString("C")</p>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">Back to Orders</a>

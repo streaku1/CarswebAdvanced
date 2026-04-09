@@ -1,0 +1,12 @@
+﻿@model Carsweb.Models.Cars
+
+@{
+    ViewData["Title"] = "Car Details";
+}
+
+<h2>@Model.Brand @Model.Name</h2>
+<p><strong>Brand:</strong> @Model.Brand</p>
+<p><strong>Model:</strong> @Model.Name</p>
+<p><strong>Price:</strong> $@Model.Price</p>
+
+<a class="btn btn-secondary" href="/Cars/Index">Back to list</a>

@@ -1,0 +1,30 @@
+﻿@model List<Carsweb.Models.Cars>
+<p>Total cars: @Model.Count</p>
+
+@{
+    ViewData["Title"] = "Cars";
+}
+
+<h2>Cars List</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Model</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+        {
+            <tr>
+                <td>@car.Name</td>
+                <td>@car.Brand</td>
+                <td>$@car.Price</td>
+                <td><a class="btn btn-sm btn-primary" href="/Cars/Details/@car.Id">View</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,34 @@
+﻿@model Carsweb.Models.Order
+
+@{
+    ViewData["Title"] = "Create Order";
+}
+
+<h2>Create Order</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label>Customer Id</label>
+        <input asp-for="CustomerId" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Car Id</label>
+        <input asp-for="CarId" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+        <label>Order Date</label>
+        <input asp-for="OrderDate" class="form-control" type="date" />
+    </div>
+
+    <div class="form-group">
+        <label>Total Price</label>
+        <input asp-for="TotalPrice" class="form-control" />
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-success">Save Order</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+</form>
