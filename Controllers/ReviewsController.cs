@@ -43,9 +43,9 @@ namespace Carsweb.Controllers
             return View(review);
         }
 
-        public IActionResult Create()
+        public async  Task<IActionResult> Create()
         {
-            ViewData["CarId"] = new SelectList(_context.Cars, "Id", "Brand");
+            ViewBag.Cars = await _context.Cars.ToListAsync();
             return View();
         }
 
@@ -108,8 +108,10 @@ namespace Carsweb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CarId"] = new SelectList(_context.Cars, "Id", "Brand", review.CarId);
+                    
+            ViewBag.CarId = new SelectList(_context.Cars, "Id", "Brand");
             return View(review);
+        
         }
 
         public async Task<IActionResult> Delete(int? id)
