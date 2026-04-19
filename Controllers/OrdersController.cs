@@ -1,6 +1,7 @@
 ﻿using Carsweb.Data;
 using Carsweb.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 
 namespace Carsweb.Controllers
@@ -29,6 +30,9 @@ namespace Carsweb.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.Cars = new SelectList(_context.Cars, "Id", "Name");
+            ViewBag.Customers = new SelectList(_context.Customers, "Id", "Name");
+
             return View();
         }
 
@@ -36,7 +40,12 @@ namespace Carsweb.Controllers
         public IActionResult Create(Order order)
         {
             if (!ModelState.IsValid)
+            {
+                ViewBag.Cars = new SelectList(_context.Cars, "Id", "Name");
+                ViewBag.Customers = new SelectList(_context.Customers, "Id", "Name");
+
                 return View(order);
+            }
 
             _context.Orders.Add(order);
             _context.SaveChanges();
