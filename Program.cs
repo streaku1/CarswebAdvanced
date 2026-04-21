@@ -12,6 +12,7 @@ namespace Carsweb
 
             builder.Services.AddControllersWithViews();
 
+
             builder.Services.AddRazorPages();
 
             builder.Services.AddDbContext<AppDbContext>(options =>
@@ -26,6 +27,14 @@ namespace Carsweb
             .AddEntityFrameworkStores<AppDbContext>();
 
             var app = builder.Build();
+
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Error/500");
+                app.UseHsts();
+            }
+
+            app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
             using (var scope = app.Services.CreateScope())
             {

@@ -51,67 +51,41 @@ namespace Carsweb.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Comment,Rating,CarId")] Review review)
+        public async Task<IActionResult> Create(Review review)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(review);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["CarId"] = new SelectList(_context.Cars, "Id", "Brand", review.CarId);
-            return View(review);
+            Console.WriteLine("POST TESTINGG");
+
+            _context.Add(review);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var review = await _context.Reviews.FindAsync(id);
-            if (review == null)
-            {
-                return NotFound();
-            }
-            ViewData["CarId"] = new SelectList(_context.Cars, "Id", "Brand", review.CarId);
+            if (review == null) return NotFound();
+
+            var cars = await _context.Cars.ToListAsync();
+            ViewBag.Cars = new SelectList(cars, "Id", "Brand", review.CarId);
+
             return View(review);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Comment,Rating,CarId")] Review review)
+        public async Task<IActionResult> Edit(int id, Review review)
         {
             if (id != review.Id)
-            {
                 return NotFound();
-            }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(review);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ReviewExists(review.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-                    
-            ViewBag.CarId = new SelectList(_context.Cars, "Id", "Brand");
-            return View(review);
-        
+
+            _context.Update(review);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Delete(int? id)
