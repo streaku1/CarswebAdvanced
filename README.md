@@ -8,6 +8,8 @@ The app allows you to create reviews with a comment, rating, and selected car.
 
 It includes error handling that displays custom 404 and 500 error pages instead of crashing when an exception occurs.
 
+You can register and login using the navigation bar buttons on the top right of the screen included in the layout by using your email and a password.
+
 How to use:
 
 Run locally
